@@ -8,7 +8,8 @@
   padding: 5px; }
 
 #inputDigitacao {
-  height: 15rem !important; }
+  height: 15rem !important;
+  resize: none; }
 
 #formDigitacao {
   display: none; }

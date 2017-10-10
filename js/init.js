@@ -1,6 +1,8 @@
 $( document ).ready(function() {
 
   var errors = 0;
+  var count = 60;
+  var counter;
   
       // Initialize Firebase
   var config = {
@@ -21,15 +23,41 @@ $( document ).ready(function() {
       console.log(error);
   });
  
+  $("#startButton").click(startTest);
+  
+  function startTest(){
+  
+      $("#formEmail").css({ display : "none" });
+      $("#formDigitacao").css("display","block");
+      
+      counter = setInterval(timer, 1000);
+  
+  }
+
+  function timer(){
+    count = count - 1;
+    if (count <= 0)
+      {
+        clearInterval(counter);
+        $("#formDigitacao").css("display","none");
+        submit();
+        return;
+      }
+      $("#counterSpan").text(count);
+  }
+
   $("#inputDigitacao").keydown(function(event){
     var KeyID = event.keyCode;
+
+    console.log(similarity($('#inputDigitacao').val(), $('#textoDigitacao').text()));
+
     switch(KeyID)
     {
        case 8:
-         errors = errors + 1; 
+         errors = errors + 1;
        break; 
        case 46:
-         errors = errors + 1; 
+         errors = errors + 1;
        break;
        default:
        break;
@@ -39,38 +67,72 @@ $( document ).ready(function() {
   $("#finishButton").click(submit);
 
   function submit(){
+    
+    var textoOriginal = $('#textoDigitacao').text();
     var texto = $('#inputDigitacao');
-    var email = $('#EmailInput');
+    var email = $('#emailInput');
+    var porcentagemAtingida = similarity(texto.val(), textoOriginal);
 
-    if (validName(name.val())) {
-      if (is_email(email.val())) {  
-          firebase.database().ref('tests/').push({
-                TextoFinal: texto.text(),
-                Email: email.val(),
-                IP: leadIP,
-                // Data: date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear(),
-                // Hora: date.getHours() + ':' + date.getMinutes() + ':'+ date.getSeconds(),
-                data: Date()
-          },onSignupComplete);
+    firebase.database().ref('resultados/').push({
+      Email: email.val(),
+      IP: leadIP,
+      Porcentagem: Math.floor(porcentagemAtingida),
+      TextoFinal: texto.val(),
+      Erros: errors,
+      Data: Date()
+    }, onSignupComplete);
 
-          name.val("");
-          email.val("");
-          celular.val("");
+    texto.val("");
+    email.val("");
+  }
 
-        } else {
-          alert("Coloque um e-mail válido!");
+  var onSignupComplete = function(error) {
+    if (error) {
+      console.log(error);
+    } else {
+      alert("Teste Finalizado!");
+      window.location("https://bancointer.com.br/");
+    }
+  };
+ 
+  function similarity(s1, s2) {
+    var longer = s1;
+    var shorter = s2;
+    if (s1.length < s2.length) {
+      longer = s2;
+      shorter = s1;
+    }
+    var longerLength = longer.length;
+    if (longerLength == 0) {
+      return 1.0;
+    }
+    return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
+  }
+  
+  function editDistance(s1, s2) {
+    s1 = s1.toLowerCase();
+    s2 = s2.toLowerCase();
+
+    var costs = new Array();
+    for (var i = 0; i <= s1.length; i++) {
+      var lastValue = i;
+      for (var j = 0; j <= s2.length; j++) {
+        if (i == 0)
+          costs[j] = j;
+        else {
+          if (j > 0) {
+            var newValue = costs[j - 1];
+            if (s1.charAt(i - 1) != s2.charAt(j - 1))
+              newValue = Math.min(Math.min(newValue, lastValue),
+                costs[j]) + 1;
+            costs[j - 1] = lastValue;
+            lastValue = newValue;
+          }
         }
-      } else {
-        alert("Coloque um nome válido!");
       }
-  }
-
-  $("#startButton").click(startTest);
-
-  function startTest(){
-    $("#startButton").css({ display : "none" })
-    $("#formDigitacao").css("display","block");
-
-  }
-
+      if (i > 0)
+        costs[s2.length] = lastValue;
+    }
+    return costs[s2.length];
+  } 
 });

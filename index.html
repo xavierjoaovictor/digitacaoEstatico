@@ -14,26 +14,34 @@
     <nav class="orange lighten-1" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" href="https://bancointer.com.br/" class="brand-logo"><img src="imgs/logo-banco-inter-white.png" height="20%"></a>
-            <!--<ul class="right hide-on-med-and-down">
-                <li><a href="#">Navbar Link</a></li>
-            </ul>
-
-            <ul id="nav-mobile" class="side-nav">
-                <li><a href="#">Navbar Link</a></li>
-            </ul>
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>-->
         </div>
     </nav>
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
             <br><br>
+            <div class="row center">
+                <div class="col s12">
+                    <img src="imgs/logo-banco-inter-degrade.png">
+                </div>
+            </div>            
             <h1 class="header center orange-text">Teste de digitação</h1>
             <div class="row center">
                 <h5 class="header col s12 light">Teste de proficiência em digitação para avaliação.</h5>
             </div>
-            <div class="row center">
-                <a href="#" id="startButton" onclick="openForm()" class="btn-large waves-effect waves-light orange">Começar</a>
+
+            <div id="formEmail" class="center-align">
+                <div class="row center">
+                    <form class="col s12">
+                        <div class="row center input-field">
+                            <input placeholder="E-mail" id="emailInput" type="text" class="validate">
+                        </div>
+                        <div class="row center">
+                            <a href="#" id="startButton" class="btn-large waves-effect waves-light orange">Começar</a>
+                        </div>
+                    </form>
+                </div>
             </div>
+ 
             <br><br>
         </div>
     </div>
@@ -43,6 +51,11 @@
     <div class="section">
 
         <div id="formDigitacao">
+            <div class="row center">
+                <div id="timer">
+                    <h5>Você ainda tem <span id="counterSpan"></span> segudos para finalizar o teste.</h5>
+                </div>
+            </div>
             <div class="row">
                 <div class="col s12 m6">
                     <p id="textoDigitacao">Ao longo de 23 anos, crescemos e alcançamos inúmeras conquistas com o nome Intermedium. 
@@ -63,7 +76,6 @@
                 <a href="#" id="finishButton" class="btn-large waves-effect waves-light orange">Enviar</a>
             </div>
         </div>
- 
       <!--   Icon Section   
         <div class="row">
             <div class="col s12 m4">
@@ -92,8 +104,8 @@
                     <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
                 </div>
             </div>
-        </div>
-    -->
+        </div>-->
+    
     </div>
     <br><br>
   </div>
@@ -133,7 +145,7 @@
     </div>
     <div class="footer-copyright">
       <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      Feito por <a class="orange-text text-lighten-3" href="https://bancointer.com.br/">Banco Inter</a>
       </div>
     </div>
   </footer>
