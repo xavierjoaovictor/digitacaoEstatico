@@ -72,7 +72,7 @@ $( document ).ready(function() {
     var porcentagemAtingida = similarity(texto.val(), textoOriginal);
     var data = new Date();
 
-    if (texto.val() != "" || email != "")
+    if (texto.val() != "" && email != "")
     {
       firebase.database().ref('resultados/').push({
         Email: email.val(),
