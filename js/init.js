@@ -1,5 +1,9 @@
 $( document ).ready(function() {
 
+  $('#inputText').bind("cut copy paste",function(e) {
+    e.preventDefault();
+  });
+
   var errors = 0;
   var count = 60;
   var counter;
