@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Starter Template - Materialize</title>
+  <title>Resultados - Digitação</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -24,51 +24,33 @@
                     <img src="imgs/logo-banco-inter-degrade.png">
                 </div>
             </div>            
-            <h1 class="header center orange-text">Teste de digitação</h1>
+            <h1 class="header center orange-text">Resultados</h1>
             <div class="row center">
-                <h5 class="header col s12 light">Teste de proficiência em digitação para avaliação.</h5>
+                <h5 class="header col s12 light">Resultados do Teste de em digitação.</h5>
             </div>
 
-            <div id="formEmail" class="center-align">
-                <div class="row center">
-                    <form class="col s12">
-                        <div class="row center input-field">
-                            <input placeholder="E-mail" id="emailInput" type="text" class="validate">
-                        </div>
-                        <div class="row center">
-                            <a href="#" id="startButton" class="btn-large waves-effect waves-light orange">Começar</a>
-                        </div>
-                    </form>
-                </div>
+            <div class="row center">
+                <table class="striped">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>IP</th>
+                            <th>Porcentagem</th>
+                            <th>Texto Final</th>
+                            <th>Erros</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+            
+                    <tbody id="corpoTabela">
+                    </tbody>
+                </table>
             </div>
- 
             <br><br>
         </div>
     </div>
 
 
-  <div class="container">
-    <div class="section">
-
-        <div id="formDigitacao">
-            <div class="row center">
-                <div id="timer">
-                    <h5>Você ainda tem <span id="counterSpan"></span> segudos para finalizar o teste.</h5>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 m6">
-                    <p id="textoDigitacao">Ao longo de 23 anos, crescemos e alcançamos inúmeras conquistas com o nome Intermedium. Nessa trajetória, mudamos muito: de financeira para banco, de regional para nacional, de crédito para serviços múltiplos. A partir de 2017, adotamos um novo nome e uma nova marca: Banco Inter; uma mudança que reflete a evolução do nosso negócio e do mercado no qual atuamos. Ainda como Intermedium, fomos o primeiro banco 100% digital do país e o único a oferecer conta corrente digital totalmente isenta de tarifas, integrada a uma completa plataforma de serviços financeiros. E como Banco Inter, vamos fazer muito mais. Nosso propósito é democratizar o acesso bancário no Brasil, fazendo da relação com os clientes uma parceria onde todos ganham e cada experiência é simples, segura e transparente.                        
-                    </p>
-                </div>
-                <div class="col s12 m6">
-                    <textarea name="inputText" id="inputDigitacao" cols="30" rows="10"></textarea>
-                </div>
-            </div>
-            <div class="row center">
-                <a href="#" id="finishButton" class="btn-large waves-effect waves-light orange">Enviar</a>
-            </div>
-        </div>
       <!--   Icon Section   
         <div class="row">
             <div class="col s12 m4">
@@ -127,7 +109,7 @@
         <div class="col l3 s12">
           <h5 class="white-text">Connect</h5>
           <ul>
-            <li><a class="white-text" href="resultados.html">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 1</a></li>
             <li><a class="white-text" href="#!">Link 2</a></li>
             <li><a class="white-text" href="#!">Link 3</a></li>
             <li><a class="white-text" href="#!">Link 4</a></li>

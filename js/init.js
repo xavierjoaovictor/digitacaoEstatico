@@ -49,8 +49,6 @@ $( document ).ready(function() {
   $("#inputDigitacao").keydown(function(event){
     var KeyID = event.keyCode;
 
-    console.log(similarity($('#inputDigitacao').val(), $('#textoDigitacao').text()));
-
     switch(KeyID)
     {
        case 8:
@@ -72,18 +70,22 @@ $( document ).ready(function() {
     var texto = $('#inputDigitacao');
     var email = $('#emailInput');
     var porcentagemAtingida = similarity(texto.val(), textoOriginal);
+    var data = new Date();
 
-    firebase.database().ref('resultados/').push({
-      Email: email.val(),
-      IP: leadIP,
-      Porcentagem: Math.floor(porcentagemAtingida),
-      TextoFinal: texto.val(),
-      Erros: errors,
-      Data: Date()
-    }, onSignupComplete);
+    if (texto.val() != "" || email != "")
+    {
+      firebase.database().ref('resultados/').push({
+        Email: email.val(),
+        IP: leadIP,
+        Porcentagem: Math.floor(porcentagemAtingida * 100) + "%",
+        TextoFinal: texto.val(),
+        Erros: errors,
+        Data: data.toLocaleString()
+      }, onSignupComplete);
 
-    texto.val("");
-    email.val("");
+      texto.val("");
+      email.val("");
+    }
   }
 
   var onSignupComplete = function(error) {
@@ -91,7 +93,7 @@ $( document ).ready(function() {
       console.log(error);
     } else {
       alert("Teste Finalizado!");
-      window.location("https://bancointer.com.br/");
+      window.location.replace("https://bancointer.com.br/");
     }
   };
  
@@ -135,4 +137,22 @@ $( document ).ready(function() {
     }
     return costs[s2.length];
   } 
+
+  database.ref('/resultados').once('value', function(snapshot){
+    if(snapshot.exists()){
+        var content = '';
+        snapshot.forEach(function(data){
+            var val = data.val();
+            content += '<tr>';
+            content += '<td>' + val.Email + '</td>';
+            content += '<td>' + val.IP + '</td>';
+            content += '<td>' + val.Porcentagem + '</td>';
+            content += '<td>' + val.TextoFinal + '</td>';
+            content += '<td>' + val.Erros + '</td>';
+            content += '<td>' + val.Data + '</td>';
+            content += '</tr>';
+        });
+        $('#corpoTabela').append(content);
+    }
+  });
 });
